@@ -5,3 +5,5 @@ coverage/
 cypress/videos/
 cypress/screenshots/
 .DS_Store
+CLAUDE.md
+TEAM_PLAN.md
