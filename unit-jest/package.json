@@ -1,0 +1,35 @@
+{
+  "name": "dogtrips-unit-jest",
+  "version": "1.0.0",
+  "description": "Unit test suite (Jest) for DogTrips business logic - SQ Project Team 08",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "test:smoke": "jest __tests__/smoke",
+    "test:regression": "jest __tests__/regression",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ],
+    "globalSetup": "<rootDir>/jest.global-setup.js",
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coverageReporters": [
+      "text",
+      "html"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 70
+      }
+    },
+    "verbose": true
+  }
+}

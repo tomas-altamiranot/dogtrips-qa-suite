@@ -1,0 +1,8 @@
+caso,peso,expectedStatus
+valido,25,201
+en_el_minimo,0.5,201
+en_el_maximo,90,201
+debajo_del_minimo,0.49,400
+arriba_del_maximo,90.01,400
+negativo,-1,400
+texto,abc,400
