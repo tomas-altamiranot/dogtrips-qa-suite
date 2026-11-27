@@ -29,24 +29,4 @@ Cypress.Commands.add('loginByApi', (role = 'client') => {
     })
 })
 
-// ---------- FACTORY PATTERN ----------
-
-// Prospect factory for the Meet & Greet: builds valid, unique data and lets
-// each test override only what it needs to change.
-// cy.buildProspect({ duenoEmail: 'bad' }).then((p) => ...)
-Cypress.Commands.add('buildProspect', (overrides = {}) => {
-    const id = Date.now()
-    return cy.wrap({
-        duenoNombre: 'QA Cypress',
-        duenoEmail: `cy.${id}@dogtrips.test`,
-        duenoTelefono: '555-123-4567',
-        duenoCalle: 'Calle 60 #500',
-        duenoCiudad: 'Mérida',
-        duenoEstado: 'Yucatán',
-        mascotaNombre: 'Rocky',
-        mascotaRaza: 'Beagle',
-        mascotaGenero: 'Macho',
-        mascotaFechaNacimiento: '2022-04-10',
-        ...overrides
-    }, { log: false })
-})
+// The factory lives in support/factories/prospect.factory.js (a plain function, not a command).
