@@ -1,14 +1,15 @@
-// Page Object: formulario de Meet & Greet (registro de prospectos).
-const CAMPOS = [
+// Page Object: Meet & Greet form (prospect sign-up request).
+// Field names match the app's form inputs (data-cy="mg-<field>").
+const FIELDS = [
     'duenoNombre', 'duenoEmail', 'duenoTelefono', 'duenoCalle', 'duenoCiudad', 'duenoEstado',
     'mascotaNombre', 'mascotaRaza', 'mascotaFechaNacimiento'
 ]
 
 class MeetAndGreetPage {
     field(name) { return cy.get(`[data-cy="mg-${name}"]`) }
-    get genero() { return cy.get('[data-cy="mg-mascotaGenero"]') }
+    get gender() { return cy.get('[data-cy="mg-mascotaGenero"]') }
     get submitBtn() { return cy.get('[data-cy="mg-submit"]') }
-    get exito() { return cy.get('[data-cy="mg-exito"]') }
+    get success() { return cy.get('[data-cy="mg-exito"]') }
     get error() { return cy.get('[data-cy="mg-error"]') }
 
     visit() {
@@ -16,14 +17,14 @@ class MeetAndGreetPage {
         return this
     }
 
-    // Llena solo los campos presentes en `datos` (permite probar formularios incompletos)
-    fill(datos) {
-        CAMPOS.forEach((campo) => {
-            if (datos[campo] !== undefined && datos[campo] !== '') {
-                this.field(campo).clear().type(datos[campo], { delay: 0 })
+    // Fills only the fields present in `data` (lets us test incomplete forms)
+    fill(data) {
+        FIELDS.forEach((field) => {
+            if (data[field] !== undefined && data[field] !== '') {
+                this.field(field).clear().type(data[field], { delay: 0 })
             }
         })
-        if (datos.mascotaGenero) this.genero.select(datos.mascotaGenero)
+        if (data.mascotaGenero) this.gender.select(data.mascotaGenero)
         return this
     }
 
@@ -34,4 +35,4 @@ class MeetAndGreetPage {
 }
 
 module.exports = new MeetAndGreetPage()
-module.exports.CAMPOS = CAMPOS
+module.exports.FIELDS = FIELDS

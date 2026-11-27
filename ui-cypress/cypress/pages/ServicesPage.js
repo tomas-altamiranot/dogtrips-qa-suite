@@ -1,4 +1,4 @@
-// Page Object: catálogo de paquetes (Servicios).
+// Page Object: package catalog (Services).
 class ServicesPage {
     get cards() { return cy.get('[data-cy="paquete-card"]') }
 

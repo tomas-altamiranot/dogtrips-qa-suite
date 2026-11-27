@@ -1,6 +1,6 @@
-// Page Object: pantalla de Login.
-// Única fuente de verdad de los selectores de esta pantalla: si cambia un
-// data-cy, solo se corrige aquí y todos los specs siguen funcionando.
+// Page Object: Login screen.
+// Single source of truth for this screen's selectors: if a data-cy changes,
+// it is fixed here only and every spec keeps working.
 class LoginPage {
     get email() { return cy.get('[data-cy="login-email"]') }
     get password() { return cy.get('[data-cy="login-password"]') }
@@ -14,7 +14,7 @@ class LoginPage {
 
     fill(email, password) {
         if (email) this.email.clear().type(email)
-        if (password) this.password.clear().type(password, { log: false })   // no mostrar la contraseña en el log
+        if (password) this.password.clear().type(password, { log: false })   // never show the password in the log
         return this
     }
 

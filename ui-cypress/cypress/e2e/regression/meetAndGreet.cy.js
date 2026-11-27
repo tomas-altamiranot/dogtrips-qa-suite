@@ -1,8 +1,8 @@
-// REGRESSION - Formulario Meet & Greet.
-// El POST se stubbea con cy.intercept para no llenar la base de datos real
-// con prospectos de prueba (y poder simular errores del servidor).
+// REGRESSION - Meet & Greet form.
+// The POST is stubbed with cy.intercept so we don't fill the real database
+// with test prospects (and so we can simulate server errors).
 const MeetAndGreetPage = require('../../pages/MeetAndGreetPage')
-const prospectos = require('../../fixtures/prospectos.json')
+const prospects = require('../../fixtures/prospects.json')
 
 describe('Regression - Meet & Greet', () => {
 
@@ -11,52 +11,52 @@ describe('Regression - Meet & Greet', () => {
     })
 
     // Data-driven: fixture + factory command
-    describe('UI-RG-08 [Positive][EP] envío exitoso (data-driven con fixture)', () => {
-        prospectos.forEach((p) => {
-            it(`envía el prospecto: ${p.caso}`, () => {
-                cy.intercept('POST', '**/api/contactos', { statusCode: 201, body: { _id: 'stub', estatus: 'Pendiente' } }).as('crearContacto')
+    describe('UI-RG-08 [Positive][EP] successful submission (data-driven with fixture)', () => {
+        prospects.forEach((p) => {
+            it(`submits prospect: ${p.case}`, () => {
+                cy.intercept('POST', '**/api/contactos', { statusCode: 201, body: { _id: 'stub', estatus: 'Pendiente' } }).as('createContact')
 
-                cy.buildProspecto(p).then((datos) => {
-                    MeetAndGreetPage.fill(datos).submit()
+                cy.buildProspect(p).then((data) => {
+                    MeetAndGreetPage.fill(data).submit()
 
-                    cy.wait('@crearContacto').its('request.body').should((body) => {
-                        expect(body.dueno.email).to.eq(datos.duenoEmail)
-                        expect(body.mascota).to.include({ nombre: datos.mascotaNombre, genero: datos.mascotaGenero })
+                    cy.wait('@createContact').its('request.body').should((body) => {
+                        expect(body.dueno.email).to.eq(data.duenoEmail)
+                        expect(body.mascota).to.include({ nombre: data.mascotaNombre, genero: data.mascotaGenero })
                     })
                 })
-                MeetAndGreetPage.exito.should('be.visible').and('contain.text', 'Solicitud enviada')
-                MeetAndGreetPage.field('duenoNombre').should('have.value', '')   // el formulario se limpia
+                MeetAndGreetPage.success.should('be.visible').and('contain.text', 'Solicitud enviada')
+                MeetAndGreetPage.field('duenoNombre').should('have.value', '')   // the form is cleared
             })
         })
     })
 
-    it('UI-RG-09 [Negative][Error guessing] si el servidor falla se muestra su mensaje', () => {
-        cy.intercept('POST', '**/api/contactos', { statusCode: 500, body: { message: 'Error al crear el contacto' } }).as('falla')
+    it('UI-RG-09 [Negative][Error guessing] server error shows its message', () => {
+        cy.intercept('POST', '**/api/contactos', { statusCode: 500, body: { message: 'Error al crear el contacto' } }).as('serverError')
 
-        cy.buildProspecto().then((datos) => { MeetAndGreetPage.fill(datos).submit() })
+        cy.buildProspect().then((data) => { MeetAndGreetPage.fill(data).submit() })
 
-        cy.wait('@falla')
+        cy.wait('@serverError')
         MeetAndGreetPage.error.should('be.visible').and('have.text', 'Error al crear el contacto')
-        MeetAndGreetPage.exito.should('not.exist')
+        MeetAndGreetPage.success.should('not.exist')
     })
 
-    it('UI-RG-10 [Negative][Selection: some] con un campo obligatorio vacío no se envía', () => {
-        cy.intercept('POST', '**/api/contactos').as('crearContacto')
+    it('UI-RG-10 [Negative][Selection: some] a missing required field blocks submission', () => {
+        cy.intercept('POST', '**/api/contactos').as('createContact')
 
-        cy.buildProspecto({ mascotaRaza: '' }).then((datos) => { MeetAndGreetPage.fill(datos).submit() })
+        cy.buildProspect({ mascotaRaza: '' }).then((data) => { MeetAndGreetPage.fill(data).submit() })
 
         MeetAndGreetPage.field('mascotaRaza').then(($el) => expect($el[0].validity.valueMissing).to.be.true)
-        cy.get('@crearContacto.all').should('have.length', 0)
+        cy.get('@createContact.all').should('have.length', 0)
     })
 
-    it('UI-RG-11 [Edge][BVA] acepta un nombre de dueño muy largo (255 caracteres)', () => {
-        const largo = 'A'.repeat(255)
-        cy.intercept('POST', '**/api/contactos', { statusCode: 201, body: {} }).as('crearContacto')
+    it('UI-RG-11 [Edge][BVA] accepts a 255-character owner name', () => {
+        const longName = 'A'.repeat(255)
+        cy.intercept('POST', '**/api/contactos', { statusCode: 201, body: {} }).as('createContact')
 
-        cy.buildProspecto({ duenoNombre: largo }).then((datos) => { MeetAndGreetPage.fill(datos).submit() })
+        cy.buildProspect({ duenoNombre: longName }).then((data) => { MeetAndGreetPage.fill(data).submit() })
 
-        cy.wait('@crearContacto').its('request.body.dueno.nombreCompleto').should('have.length', 255)
-        MeetAndGreetPage.exito.should('be.visible')
+        cy.wait('@createContact').its('request.body.dueno.nombreCompleto').should('have.length', 255)
+        MeetAndGreetPage.success.should('be.visible')
     })
 
 })

@@ -1,5 +1,5 @@
-// Configuración DEPLOYED: Netlify (frontend) + Render (backend).
-// Render (plan gratis) se duerme y tarda ~20 s en despertar, por eso los timeouts son mayores.
+// DEPLOYED configuration: Netlify (front end) + Render (back end).
+// Render's free plan sleeps and takes ~20 s to wake up, so timeouts are longer.
 const { defineConfig } = require('cypress')
 const base = require('./cypress.config.js')
 

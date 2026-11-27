@@ -1,5 +1,0 @@
-[
-  { "caso": "contraseña incorrecta", "email": "juan@gmail.com", "password": "incorrecta-123", "mensaje": "Credenciales incorrectas" },
-  { "caso": "email no registrado", "email": "nadie.registrado@dogtrips.test", "password": "Cualquiera123", "mensaje": "Credenciales incorrectas" },
-  { "caso": "email en mayúsculas", "email": "JUAN@GMAIL.COM", "password": "incorrecta-123", "mensaje": "Credenciales incorrectas" }
-]

@@ -1,21 +1,22 @@
-// ---------- COMANDOS SIMPLES ----------
+// ---------- SIMPLE COMMANDS ----------
 
-// Lee las credenciales de forma segura (Cypress 16): cy.env() solo entrega las
-// llaves pedidas y nunca muestra los valores en el Command Log.
-// cy.credenciales('admin').then(({ email, password }) => ...)
-Cypress.Commands.add('credenciales', (rol = 'cliente') => {
-    const pre = rol === 'admin' ? 'admin' : 'client'
-    return cy.env([pre + 'Email', pre + 'Password']).then((v) => ({ email: v[pre + 'Email'], password: v[pre + 'Password'] }))
+// Reads credentials securely (Cypress 16): cy.env() returns only the keys
+// requested and never prints their values in the Command Log.
+// cy.credentials('admin').then(({ email, password }) => ...)
+Cypress.Commands.add('credentials', (role = 'client') => {
+    const prefix = role === 'admin' ? 'admin' : 'client'
+    return cy.env([prefix + 'Email', prefix + 'Password'])
+        .then((v) => ({ email: v[prefix + 'Email'], password: v[prefix + 'Password'] }))
 })
 
 // cy.getByCy('login-email') → cy.get('[data-cy="login-email"]')
 Cypress.Commands.add('getByCy', (name) => cy.get(`[data-cy="${name}"]`))
 
-// Inicia sesión por API (sin pasar por la pantalla) y deja la sesión lista en
-// localStorage, igual que lo hace AuthContext. Más rápido y estable que el UI
-// cuando el login no es lo que se está probando.
-Cypress.Commands.add('loginByApi', (rol = 'cliente') => {
-    return cy.credenciales(rol).then(({ email, password }) => cy.request({
+// Logs in through the API (skipping the login screen) and stores the session in
+// localStorage, exactly like the app's AuthContext does. Faster and more stable
+// than the UI when the login itself is not what is being tested.
+Cypress.Commands.add('loginByApi', (role = 'client') => {
+    return cy.credentials(role).then(({ email, password }) => cy.request({
         method: 'POST',
         url: `${Cypress.expose('apiUrl')}/api/usuarios/login`,
         body: { email, password },
@@ -30,10 +31,10 @@ Cypress.Commands.add('loginByApi', (rol = 'cliente') => {
 
 // ---------- FACTORY PATTERN ----------
 
-// Fábrica de prospectos para el Meet & Greet: genera datos válidos y únicos
-// y deja sobrescribir solo lo que cada test necesita variar.
-// cy.buildProspecto({ duenoEmail: 'malo' }).then((p) => ...)
-Cypress.Commands.add('buildProspecto', (overrides = {}) => {
+// Prospect factory for the Meet & Greet: builds valid, unique data and lets
+// each test override only what it needs to change.
+// cy.buildProspect({ duenoEmail: 'bad' }).then((p) => ...)
+Cypress.Commands.add('buildProspect', (overrides = {}) => {
     const id = Date.now()
     return cy.wrap({
         duenoNombre: 'QA Cypress',

@@ -1,5 +1,5 @@
-// Configuración LOCAL: frontend de Vite (5173) + backend Express (5000).
-// Para el sitio desplegado se usa cypress.netlify.config.js.
+// LOCAL configuration: Vite front end (5173) + Express back end (5000).
+// The deployed site uses cypress.netlify.config.js.
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
@@ -12,7 +12,7 @@ module.exports = defineConfig({
         screenshotOnRunFailure: true,
         viewportWidth: 1280,
         viewportHeight: 800,
-        // Valores públicos → Cypress.expose(). Las contraseñas van en cypress.env.json → cy.env()
+        // Public values → Cypress.expose(). Passwords live in cypress.env.json → cy.env()
         expose: {
             apiUrl: 'http://localhost:5000'
         }

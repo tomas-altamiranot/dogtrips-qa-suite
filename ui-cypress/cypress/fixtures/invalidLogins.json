@@ -1,0 +1,5 @@
+[
+  {"case":"wrong password","email":"juan@gmail.com","password":"incorrecta-123","message":"Credenciales incorrectas"},
+  {"case":"unregistered email","email":"nadie.registrado@dogtrips.test","password":"Cualquiera123","message":"Credenciales incorrectas"},
+  {"case":"uppercase email","email":"JUAN@GMAIL.COM","password":"incorrecta-123","message":"Credenciales incorrectas"}
+]

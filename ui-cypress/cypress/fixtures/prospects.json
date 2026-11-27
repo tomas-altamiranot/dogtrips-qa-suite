@@ -1,6 +1,6 @@
 [
   {
-    "caso": "dueño con datos típicos",
+    "case": "owner with typical data",
     "duenoNombre": "María López",
     "duenoTelefono": "999-111-2233",
     "duenoCiudad": "Mérida",
@@ -9,7 +9,7 @@
     "mascotaGenero": "Hembra"
   },
   {
-    "caso": "nombres con acentos y ñ",
+    "case": "names with accents and ñ",
     "duenoNombre": "José Ñúñez Peña",
     "duenoTelefono": "999-444-5566",
     "duenoCiudad": "Progreso",
@@ -18,7 +18,7 @@
     "mascotaGenero": "Macho"
   },
   {
-    "caso": "nombre de mascota de un solo carácter",
+    "case": "single-character pet name",
     "duenoNombre": "Ana Ruiz",
     "duenoTelefono": "999-777-8899",
     "duenoCiudad": "Valladolid",

@@ -1,15 +1,15 @@
-// Page Object: paneles privados (cliente y administrador) + barra de navegación.
+// Page Object: private dashboards (client and admin) + navigation bar.
 class DashboardPage {
-    // Panel del cliente
+    // Client dashboard
     get greeting() { return cy.get('[data-cy="client-greeting"]') }
     get clientLogout() { return cy.get('[data-cy="client-logout"]') }
-    get mascotas() { return cy.get('[data-cy="client-mascota"]') }
+    get pets() { return cy.get('[data-cy="client-mascota"]') }
 
-    // Panel del admin
+    // Admin dashboard
     get adminTitle() { return cy.get('[data-cy="admin-title"]') }
-    tab(nombre) { return cy.get(`[data-cy="admin-tab-${nombre}"]`) }
+    tab(name) { return cy.get(`[data-cy="admin-tab-${name}"]`) }
 
-    // Navbar (compartida)
+    // Navigation bar (shared)
     nav(link) { return cy.get(`[data-cy="nav-${link}"]`) }
 
     logoutFromNavbar() {
