@@ -1,0 +1,5 @@
+[
+  { "_id": "fx1", "titulo": "Paseo Express", "precio": 150, "descripcion": "Paseo de 30 minutos.", "viajes": 1 },
+  { "_id": "fx2", "titulo": "Semana Activa", "precio": 900, "descripcion": "Cinco paseos en la semana.", "viajes": 5 },
+  { "_id": "fx3", "titulo": "Mes Aventurero", "precio": 3200, "descripcion": "Veinte salidas al mes.", "viajes": 20 }
+]

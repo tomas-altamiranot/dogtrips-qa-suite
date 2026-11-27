@@ -1,0 +1,19 @@
+{
+  "name": "dogtrips-ui-cypress",
+  "version": "1.0.0",
+  "private": true,
+  "description": "UI / E2E test suite (Cypress) for DogTrips - SQ Project Team 08",
+  "scripts": {
+    "cy:open": "cypress open",
+    "test:smoke": "cypress run --spec \"cypress/e2e/smoke/**\"",
+    "test:regression": "cypress run --spec \"cypress/e2e/regression/**\"",
+    "test:defects": "cypress run --spec \"cypress/e2e/known-defects/**\"",
+    "test": "cypress run --spec \"cypress/e2e/smoke/**,cypress/e2e/regression/**\"",
+    "netlify:smoke": "cypress run --config-file cypress.netlify.config.js --spec \"cypress/e2e/smoke/**\"",
+    "netlify:regression": "cypress run --config-file cypress.netlify.config.js --spec \"cypress/e2e/regression/**\"",
+    "netlify": "cypress run --config-file cypress.netlify.config.js --spec \"cypress/e2e/smoke/**,cypress/e2e/regression/**\""
+  },
+  "devDependencies": {
+    "cypress": "16.3.0"
+  }
+}

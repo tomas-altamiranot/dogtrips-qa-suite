@@ -1,0 +1,29 @@
+[
+  {
+    "caso": "dueño con datos típicos",
+    "duenoNombre": "María López",
+    "duenoTelefono": "999-111-2233",
+    "duenoCiudad": "Mérida",
+    "mascotaNombre": "Luna",
+    "mascotaRaza": "Labrador",
+    "mascotaGenero": "Hembra"
+  },
+  {
+    "caso": "nombres con acentos y ñ",
+    "duenoNombre": "José Ñúñez Peña",
+    "duenoTelefono": "999-444-5566",
+    "duenoCiudad": "Progreso",
+    "mascotaNombre": "Toño",
+    "mascotaRaza": "Schnauzer",
+    "mascotaGenero": "Macho"
+  },
+  {
+    "caso": "nombre de mascota de un solo carácter",
+    "duenoNombre": "Ana Ruiz",
+    "duenoTelefono": "999-777-8899",
+    "duenoCiudad": "Valladolid",
+    "mascotaNombre": "X",
+    "mascotaRaza": "Mestizo",
+    "mascotaGenero": "Hembra"
+  }
+]
